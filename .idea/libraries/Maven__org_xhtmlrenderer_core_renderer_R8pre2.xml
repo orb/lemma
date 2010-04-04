@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xhtmlrenderer:core-renderer:R8pre2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xhtmlrenderer/core-renderer/R8pre2/core-renderer-R8pre2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xhtmlrenderer/core-renderer/R8pre2/core-renderer-R8pre2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xhtmlrenderer/core-renderer/R8pre2/core-renderer-R8pre2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
