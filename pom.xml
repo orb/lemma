@@ -9,7 +9,7 @@
     <groupId>org.teleal.lemma</groupId>
     <artifactId>root</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
     <modules>
         <module>core</module>
@@ -131,7 +131,7 @@
         <dependency>
             <groupId>org.teleal</groupId>
             <artifactId>teleal-common</artifactId>
-            <version>1.0</version>
+            <version>1.0.1</version>
         </dependency>
 
     </dependencies>

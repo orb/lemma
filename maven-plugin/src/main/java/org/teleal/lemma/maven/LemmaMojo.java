@@ -261,15 +261,26 @@ public class LemmaMojo extends AbstractMojo {
             manualResources.addAll(Arrays.asList(files));
 
         for (File manualResource : manualResources) {
+
+            if (manualResource.getName().startsWith(".")) continue;
+
             if (manualResource.isDirectory()) {
                 // Copy the directory only if it contains any non-XHTML files
                 for (File file : manualResource.listFiles()) {
+
+                    if (file.getName().startsWith(".")) continue;
+
+                    getLog().info("Copying directory recursively: " + file);
+
                     if (!file.getName().endsWith(".xhtml")) {
                         FileUtils.copyDirectoryStructure(manualResource, new File(destination, manualResource.getName()));
                         break;
                     }
                 }
             } else {
+
+                getLog().info("Copying file: " + manualResource);
+
                 FileUtils.copyFile(manualResource, new File(destination, manualResource.getName()));
             }
         }
@@ -298,6 +309,8 @@ public class LemmaMojo extends AbstractMojo {
         }
 
         for (File docFile : docFiles) {
+
+            if (docFile.getName().startsWith(".")) continue;
 
             File targetDocFile = new File(destinationDir, docFile.getName());
             if (targetDocFile.exists()) {

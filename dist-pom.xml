@@ -31,7 +31,7 @@
     <groupId>org.teleal.lemma</groupId>
     <artifactId>lemma</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <url>http://teleal.org/projects/lemma</url>
 
     <distributionManagement>
@@ -67,7 +67,7 @@
                 <plugin>
                     <groupId>org.teleal.lemma</groupId>
                     <artifactId>lemma-maven-plugin</artifactId>
-                    <version>1.0</version>
+                    <version>1.0.1</version>
                 </plugin>
 
                 <!-- We support raw XHTML files in the 'site' lifecycle -->
@@ -125,19 +125,6 @@
                 </executions>
             </plugin>
 
-            <!-- Finalize the documentation when building the website -->
-            <plugin>
-                <groupId>org.teleal.lemma</groupId>
-                <artifactId>lemma-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>finalize-manual</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- We want some other stuff on our website... -->
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -154,10 +141,22 @@
                                         <include name="xref-test/**/*"/>
                                     </fileset>
                                 </copy>
+
                                 <delete dir="${reporting.outputDirectory}/css"/>
                                 <delete dir="${reporting.outputDirectory}/images"/>
                                 <delete dir="${reporting.outputDirectory}/manual/css"/>
                                 <delete file="${reporting.outputDirectory}/project-reports.html"/>
+
+                                <move todir="${reporting.outputDirectory}">
+                                    <fileset dir="${reporting.outputDirectory}">
+                                        <include name="**/*.html"/>
+                                        <exclude name="**/apidocs/**/*"/>
+                                        <exclude name="**/xref/**/*"/>
+                                        <exclude name="**/xref-test/**/*"/>
+                                    </fileset>
+                                    <mapper type="glob" from="*.html" to="*.xhtml"/>
+                                </move>
+
                             </tasks>
                         </configuration>
                         <goals>
@@ -204,7 +203,7 @@
         <dependency>
             <groupId>org.teleal.lemma</groupId>
             <artifactId>lemma-core</artifactId>
-            <version>1.0</version>
+            <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
