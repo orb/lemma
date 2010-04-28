@@ -265,14 +265,13 @@ public class LemmaMojo extends AbstractMojo {
             if (manualResource.getName().startsWith(".")) continue;
 
             if (manualResource.isDirectory()) {
+
                 // Copy the directory only if it contains any non-XHTML files
                 for (File file : manualResource.listFiles()) {
-
                     if (file.getName().startsWith(".")) continue;
 
-                    getLog().info("Copying directory recursively: " + file);
-
                     if (!file.getName().endsWith(".xhtml")) {
+                        getLog().info("Copying directory recursively: " + manualResource);
                         FileUtils.copyDirectoryStructure(manualResource, new File(destination, manualResource.getName()));
                         break;
                     }
