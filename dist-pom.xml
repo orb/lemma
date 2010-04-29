@@ -107,6 +107,8 @@
                         <descriptor>src/dist/assembly.xml</descriptor>
                     </descriptors>
                     <workDirectory>target/assembly/work</workDirectory>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>${project.artifactId}-distribution-${project.version}</finalName>
                 </configuration>
             </plugin>
 
