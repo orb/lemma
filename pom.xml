@@ -53,7 +53,7 @@
     <distributionManagement>
         <repository>
             <id>teleal.org</id>
-            <url>scpexe://teleal.org/webroot/teleal.org/m2</url>
+            <url>scpexe://teleal.org/webroot/vhosts/teleal.org/m2</url>
         </repository>
     </distributionManagement>
 
@@ -89,14 +89,17 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
             <id>onejar-maven-plugin.googlecode.com</id>
             <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-    </repositories>
+        </pluginRepository>
+    </pluginRepositories>
 
     <!-- ##################################################################################################### -->
 
