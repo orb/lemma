@@ -7,7 +7,7 @@
     <parent>
         <artifactId>root</artifactId>
         <groupId>org.teleal.lemma</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     <name>Lemma Maven Plugin</name>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.teleal.lemma</groupId>
             <artifactId>lemma-core</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>

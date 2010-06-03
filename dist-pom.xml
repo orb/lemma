@@ -31,7 +31,7 @@
     <groupId>org.teleal.lemma</groupId>
     <artifactId>lemma</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <url>http://teleal.org/projects/lemma</url>
 
     <distributionManagement>
@@ -67,7 +67,7 @@
                 <plugin>
                     <groupId>org.teleal.lemma</groupId>
                     <artifactId>lemma-maven-plugin</artifactId>
-                    <version>1.0.1</version>
+                    <version>1.0.2</version>
                 </plugin>
 
                 <!-- We support raw XHTML files in the 'site' lifecycle -->
@@ -205,7 +205,7 @@
         <dependency>
             <groupId>org.teleal.lemma</groupId>
             <artifactId>lemma-core</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

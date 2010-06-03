@@ -9,12 +9,14 @@
     <groupId>org.teleal.lemma</groupId>
     <artifactId>root</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <modules>
         <module>core</module>
         <module>maven-plugin</module>
-        <module>gui</module>
+        <!--
+                <module>gui</module>
+        -->
     </modules>
 
     <!-- ##################################################################################################### -->
@@ -109,6 +111,29 @@
 
     <!-- ##################################################################################################### -->
 
+    <profiles>
+        <profile>
+            <id>default-tools.jar</id>
+            <activation>
+                <property>
+                    <name>java.vendor</name>
+                    <value>Sun Microsystems Inc.</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>1.6.0</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <!-- ##################################################################################################### -->
+
     <dependencies>
 
         <dependency>
@@ -134,7 +159,7 @@
         <dependency>
             <groupId>org.teleal</groupId>
             <artifactId>teleal-common</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
         </dependency>
 
     </dependencies>
