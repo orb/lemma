@@ -26,11 +26,11 @@ import java.util.logging.Logger;
 
 /**
  * Encapsulates parsing of citation anchor URIs.
- *
+ * <p/>
  * <p>
  * Two addresses are <em>equal</em> if they have the same scheme and path, and (if not null) fragment.
  * </p>
- * 
+ *
  * @author Christian Bauer
  */
 public class AnchorAddress {
@@ -39,6 +39,8 @@ public class AnchorAddress {
 
     public static final Pattern PATTERN =
             Pattern.compile("^([a-zA-Z]+?)://([ \\p{Alnum}\\./_-]+?)(?:#([\\p{Alnum}]+?\\([\\p{Alnum},\\.\\[\\]<>\\s]*?\\)))??$");
+
+    public static final String PATH_THIS = "this";
 
     final private Scheme scheme;
     final private String path;
@@ -86,7 +88,7 @@ public class AnchorAddress {
         if (tag.referencedMember() != null && tag.referencedMember().isMethod()) {
             reference = tag.referencedClassName() + "#" +
                     tag.referencedMember().name() +
-                    ((MethodDoc)tag.referencedMember()).flatSignature();
+                    ((MethodDoc) tag.referencedMember()).flatSignature();
         } else if (tag.referencedClass() != null) {
             reference = tag.referencedClassName();
         } else if (tag.referencedPackage() != null) {
@@ -96,6 +98,14 @@ public class AnchorAddress {
         return reference != null
                 ? valueOf(scheme.name().toLowerCase() + Scheme.SEPARATOR + reference)
                 : null;
+    }
+
+    public static AnchorAddress valueOf(Scheme scheme, MethodDoc methodDoc) {
+        return new AnchorAddress(
+                scheme,
+                methodDoc.containingClass().qualifiedTypeName() + "#" + methodDoc.name() + methodDoc.flatSignature(),
+                null
+        );
     }
 
     /**
@@ -109,7 +119,7 @@ public class AnchorAddress {
 
         // Always remove leading and trailing slashes
         if (string.startsWith("/")) string = string.substring(1);
-        if (string.endsWith("/")) string = string.substring(0, string.length()-1);
+        if (string.endsWith("/")) string = string.substring(0, string.length() - 1);
 
         return Scheme.FILE + Scheme.SEPARATOR + string;
     }

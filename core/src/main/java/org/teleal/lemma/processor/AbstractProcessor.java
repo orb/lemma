@@ -127,17 +127,4 @@ public abstract class AbstractProcessor<IN, OUT> implements Processor<IN, OUT> {
         return readerCache.get(readerType);
     }
 
-    protected CitationAnchor[] findCitationAnchors(XHTML input, String type) {
-        return findCitationAnchors(input.getRoot(getXPath()), type);
-    }
-
-    protected CitationAnchor[] findCitationAnchors(XHTMLElement start, String type) {
-        org.teleal.common.xhtml.Anchor[] anchors = start.findAllAnchors(null, type);
-        CitationAnchor[] a = new CitationAnchor[anchors.length];
-        for (int i = 0; i < anchors.length; i++) {
-            a[i] = new CitationAnchor(getXPath(), anchors[i]);
-        }
-        return a;
-    }
-
 }

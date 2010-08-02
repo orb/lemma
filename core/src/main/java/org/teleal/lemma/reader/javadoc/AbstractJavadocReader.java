@@ -19,9 +19,13 @@ package org.teleal.lemma.reader.javadoc;
 
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.Doc;
+import com.sun.javadoc.ExecutableMemberDoc;
 import com.sun.javadoc.MethodDoc;
+import com.sun.javadoc.PackageDoc;
 import com.sun.javadoc.RootDoc;
 import org.teleal.common.xhtml.XHTML;
+import org.teleal.lemma.Constants;
+import org.teleal.lemma.anchor.AnchorAddress;
 import org.teleal.lemma.anchor.CitationAnchor;
 import org.teleal.lemma.anchor.Scheme;
 import org.teleal.lemma.pipeline.Context;
@@ -41,7 +45,7 @@ public abstract class AbstractJavadocReader extends AbstractReader {
     final public static String CONTEXT_ROOT_DOC = " JavadocReader.rootDoc";
 
     public XHTML read(CitationAnchor citation, Context context) {
-        RootDoc rootDoc = (RootDoc)context.get(CONTEXT_ROOT_DOC);
+        RootDoc rootDoc = (RootDoc) context.get(CONTEXT_ROOT_DOC);
         if (rootDoc == null) {
             throw new IllegalStateException("Missing root Javadoc in context, can't read Javadoc");
         }
@@ -90,6 +94,45 @@ public abstract class AbstractJavadocReader extends AbstractReader {
             throw new IllegalArgumentException("Target not found in Javadoc unit: " + citation);
         }
         return targetDoc;
+    }
+
+    protected XHTML resolveThisReferences(Context context, Doc targetDoc, XHTML input) {
+        CitationAnchor[] anchors = CitationAnchor.findCitationAnchors(getXPath(), input, Constants.TYPE_CITATION);
+        for (CitationAnchor citation : anchors) {
+            if (citation.getAddress().getPath().equals(AnchorAddress.PATH_THIS)) {
+
+                AnchorAddress resolvedAddress;
+
+                if (targetDoc instanceof ClassDoc) {
+                    ClassDoc classDoc = (ClassDoc) targetDoc;
+                    resolvedAddress = new AnchorAddress(
+                            citation.getAddress().getScheme(),
+                            classDoc.qualifiedTypeName(),
+                            null
+                    );
+                } else if (targetDoc instanceof PackageDoc) {
+                    resolvedAddress = new AnchorAddress(
+                            citation.getAddress().getScheme(),
+                            targetDoc.name(),
+                            null
+                    );
+                } else if (targetDoc instanceof MethodDoc) {
+                    MethodDoc methodDoc = (MethodDoc) targetDoc;
+
+                    resolvedAddress = AnchorAddress.valueOf(citation.getAddress().getScheme(), methodDoc);
+
+                } else {
+                    throw new IllegalArgumentException(
+                        "Unknown doc type/reference, unable to resolve 'this' reference: " + citation
+                    );
+                }
+
+                log.fine("Replacing 'this' reference with anchor address: " + resolvedAddress);
+                citation.setAttribute(XHTML.ATTR.href, resolvedAddress.toString());
+            }
+        }
+
+        return input;
     }
 
 }

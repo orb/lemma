@@ -56,7 +56,7 @@ public class XRefProcessor extends AbstractProcessor<XHTML, XHTML> {
 
     protected XHTML transformReferences(XHTML input, Context context) {
 
-        CitationAnchor[] xrefs = findCitationAnchors(input, Constants.TYPE_XREF);
+        CitationAnchor[] xrefs = CitationAnchor.findCitationAnchors(getXPath(), input, Constants.TYPE_XREF);
         for (CitationAnchor xref : xrefs) {
 
             String xrefTarget = xref.getAddress().toIdentifierString();

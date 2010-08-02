@@ -37,7 +37,8 @@
                     <code><![CDATA[<a ... href="javadoc://my.package.MyClass"/>]]></code><br/>
                     <code><![CDATA[<a ... href="javadoc://my.package.MyClass.MyNestedClass"/>]]></code><br/>
                     <code><![CDATA[<a ... href="javadoc://my.package.MyClass#myMethod()"/>]]></code><br/>
-                    <code><![CDATA[<a ... href="javadoc://my.package.MyClass#otherMethod(Type, Type)"/>]]></code>
+                    <code><![CDATA[<a ... href="javadoc://my.package.MyClass#otherMethod(Type, Type)"/>]]></code><br/>
+                    <code><![CDATA[<a ... href="javadoc://this"/>]]></code>
                 </td>
                 <td>
                     Include the Javadoc XHTML (well-formed) comment text of the specified package, class, or
@@ -53,7 +54,8 @@
                     <code><![CDATA[<a ... href="javacode://my.package.MyClass"/>]]></code><br/>
                     <code><![CDATA[<a ... href="javacode://my.package.MyClass.MyNestedClass"/>]]></code><br/>
                     <code><![CDATA[<a ... href="javacode://my.package.MyClass#myMethod()"/>]]></code><br/>
-                    <code><![CDATA[<a ... href="javacode://my.package.MyClass#otherMethod(Type, Type)"/>]]></code>
+                    <code><![CDATA[<a ... href="javacode://my.package.MyClass#otherMethod(Type, Type)"/>]]></code><br/>
+                    <code><![CDATA[<a ... href="javacode://this"/>]]></code>
                 </td>
                 <td>
                     Include the raw source code of the referenced package, class, or method. Note that method
@@ -81,6 +83,10 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="section">
+            <a class="citation" href="javadoc://example.helloworld.AnchorThis"/>
+        </div>
 
         <p>
             Citation can be customized with options, specified as CSS-like values with the {@code style} attribute

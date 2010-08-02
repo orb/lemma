@@ -50,10 +50,10 @@ public class JavadocReader extends AbstractJavadocReader {
     final private Logger log = Logger.getLogger(JavadocReader.class.getName());
 
     protected XHTML read(CitationAnchor citation, Context context, RootDoc rootDoc) {
-        return read(
-                findTargetDoc(citation, rootDoc),
-                citation
-        );
+        Doc targetDoc = findTargetDoc(citation, rootDoc);
+        XHTML result = read(targetDoc, citation);
+        resolveThisReferences(context, targetDoc, result);
+        return result;
     }
 
     protected XHTML read(Doc doc, CitationAnchor citation) {

@@ -20,8 +20,8 @@ package org.teleal.lemma.processor.xhtml;
 import com.sun.javadoc.RootDoc;
 import org.teleal.common.xhtml.XHTML;
 import org.teleal.lemma.Constants;
-import org.teleal.lemma.pipeline.Context;
 import org.teleal.lemma.anchor.CitationAnchor;
+import org.teleal.lemma.pipeline.Context;
 import org.teleal.lemma.processor.AbstractJavadocProcessor;
 import org.teleal.lemma.reader.Reader;
 
@@ -67,7 +67,7 @@ public class JavadocCitationProcessor extends AbstractJavadocProcessor<XHTML, XH
 
     protected XHTML processCitations(Context context, XHTML input, Stack<CitationAnchor> stack) {
 
-        CitationAnchor[] anchors = findCitationAnchors(input, Constants.TYPE_CITATION);
+        CitationAnchor[] anchors = CitationAnchor.findCitationAnchors(getXPath(), input, Constants.TYPE_CITATION);
         log.fine("Found citation anchors in input: " + anchors.length);
         for (CitationAnchor citation : anchors) {
 

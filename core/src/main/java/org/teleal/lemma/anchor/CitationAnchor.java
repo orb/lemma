@@ -20,6 +20,7 @@ package org.teleal.lemma.anchor;
 import org.teleal.common.xhtml.Anchor;
 import org.teleal.common.xhtml.Option;
 import org.teleal.common.xhtml.XHTML;
+import org.teleal.common.xhtml.XHTMLElement;
 import org.w3c.dom.Element;
 
 import javax.xml.xpath.XPath;
@@ -87,4 +88,18 @@ public class CitationAnchor extends Anchor {
     public String getOutputClasses() {
         return getAttribute(XHTML.ATTR.CLASS) + " " + getAddress().getScheme().name().toLowerCase();
     }
+
+    public static CitationAnchor[] findCitationAnchors(XPath xpath, XHTML input, String type) {
+        return findCitationAnchors(xpath, input.getRoot(xpath), type);
+    }
+
+    public static  CitationAnchor[] findCitationAnchors(XPath xpath, XHTMLElement start, String type) {
+        org.teleal.common.xhtml.Anchor[] anchors = start.findAllAnchors(null, type);
+        CitationAnchor[] a = new CitationAnchor[anchors.length];
+        for (int i = 0; i < anchors.length; i++) {
+            a[i] = new CitationAnchor(xpath, anchors[i]);
+        }
+        return a;
+    }
+
 }

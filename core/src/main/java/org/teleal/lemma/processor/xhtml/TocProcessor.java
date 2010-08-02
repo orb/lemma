@@ -69,7 +69,12 @@ public class TocProcessor extends AbstractProcessor<XHTML, XHTML> {
         }
 
         // We might have more than one TOC to generate
-        CitationAnchor[] tocAnchors = findCitationAnchors(input.getRoot(getXPath()).getBody(), TYPE_TOC);
+        CitationAnchor[] tocAnchors = CitationAnchor.findCitationAnchors(
+                getXPath(),
+                input.getRoot(getXPath()).getBody(),
+                TYPE_TOC
+        );
+
         if (tocAnchors.length == 0) {
             log.info("No class='toc' anchors found, returning input unchanged");
             return input;
