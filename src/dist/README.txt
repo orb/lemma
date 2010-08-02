@@ -4,7 +4,7 @@ Lemma - creating valid software documentation
 
 Version: ${project.version}
 
-Usage instructions: See manual/lemma-core-manual.xhtml
+Usage instructions: See manual/lemma-manual.xhtml
 
 Feedback, bug reports: Send an e-mail to feedback@teleal.com
 
