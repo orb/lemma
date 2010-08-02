@@ -104,23 +104,21 @@ public abstract class AbstractJavadocReader extends AbstractReader {
                 AnchorAddress resolvedAddress;
 
                 if (targetDoc instanceof ClassDoc) {
-                    ClassDoc classDoc = (ClassDoc) targetDoc;
-                    resolvedAddress = new AnchorAddress(
+                    resolvedAddress = AnchorAddress.valueOf(
                             citation.getAddress().getScheme(),
-                            classDoc.qualifiedTypeName(),
-                            null
+                            (ClassDoc)targetDoc,
+                            citation.getAddress().getFragment()
                     );
                 } else if (targetDoc instanceof PackageDoc) {
-                    resolvedAddress = new AnchorAddress(
+                    resolvedAddress = AnchorAddress.valueOf(
                             citation.getAddress().getScheme(),
-                            targetDoc.name(),
-                            null
+                            (PackageDoc)targetDoc
                     );
                 } else if (targetDoc instanceof MethodDoc) {
-                    MethodDoc methodDoc = (MethodDoc) targetDoc;
-
-                    resolvedAddress = AnchorAddress.valueOf(citation.getAddress().getScheme(), methodDoc);
-
+                    resolvedAddress = AnchorAddress.valueOf(
+                            citation.getAddress().getScheme(),
+                            (MethodDoc)targetDoc
+                    );
                 } else {
                     throw new IllegalArgumentException(
                         "Unknown doc type/reference, unable to resolve 'this' reference: " + citation

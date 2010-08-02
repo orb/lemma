@@ -25,6 +25,11 @@ public class CitationTests {
         assertEquals(address.getPath(), "com.myorg.MyClass");
         assertEquals(address.getFragment(), null);
 
+        address = AnchorAddress.valueOf("javacode://com.myorg.MyClass#myMethod");
+        assertEquals(address.getScheme(), Scheme.JAVACODE);
+        assertEquals(address.getPath(), "com.myorg.MyClass");
+        assertEquals(address.getFragment(), "myMethod()");
+
         address = AnchorAddress.valueOf("javacode://com.myorg");
         assertEquals(address.getScheme(), Scheme.JAVACODE);
         assertEquals(address.getPath(), "com.myorg");

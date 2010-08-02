@@ -31,8 +31,45 @@ public void callHelloWorld() {
                     </div>
                     <p>
  You can use this shorthand for any citation anchor in Javadoc on classes, methods, and
- packages.
+ packages. If your citation anchor is within the Javadoc comment of a class, 'this'
+ followed by a fragment references a method of the class:
  </p>
+                    <div class="citation javacode" id="anchorthis_classwithfragment">
+                        <div class="content">
+                            <pre class="prettyprint">/**
+ * This is My Class
+ * &lt;p&gt;
+ * And this is a citation anchor which references the source
+ * of a method of this class:
+ * &lt;/p&gt;
+ * &lt;a class="citation" href="javacode://this#myMethod"/&gt;
+ */
+public static class MyClass {
+
+    public void myMethod() {
+        System.out.println("Hello World!");
+    }
+}
+</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="citation javadoc" id="javadoc.example.helloworld.AnchorThis.MyClass">
+                <div class="title">This is My Class</div>
+                <div class="content">
+                    <p>
+ And this is a citation anchor which references the source
+ of a method of this class:
+ </p>
+                    <div class="citation javacode" id="javacode.example.helloworld.AnchorThis.MyClass.myMethod..">
+                        <div class="content">
+                            <pre class="prettyprint">public void myMethod() {
+    System.out.println("Hello World!");
+}
+</pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

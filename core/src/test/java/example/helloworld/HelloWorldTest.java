@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
  * <p>
  * First, write a unit test method that checks the class:
  * </p>
- * <a class="citation" href="javacode://example.helloworld.HelloWorldTest#testHelloWorld()">Citation</a>
+ * <a class="citation" href="javacode://example.helloworld.HelloWorldTest#testHelloWorld">Citation</a>
  * <p>
  * This unit test not only validates the correct behavior of the class, it also shows how the class is
  * supposed to be used. Traditionally, you'd now add a section in your software's manual, where you copy and
@@ -92,7 +92,7 @@ public class HelloWorldTest extends DocletTest {
      * </p>
      *
      * <a class="citation"
-          href="javacode://example.helloworld.HelloWorldTest#testHelloWorld()"
+          href="javacode://example.helloworld.HelloWorldTest#testHelloWorld"
           style="include: HELLOWORLD_USAGE;"/>
      *
      * <p>

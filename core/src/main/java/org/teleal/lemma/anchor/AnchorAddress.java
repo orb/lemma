@@ -17,7 +17,9 @@
 
 package org.teleal.lemma.anchor;
 
+import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.MethodDoc;
+import com.sun.javadoc.PackageDoc;
 import com.sun.javadoc.SeeTag;
 
 import java.util.regex.Matcher;
@@ -37,8 +39,14 @@ public class AnchorAddress {
 
     final private static Logger log = Logger.getLogger(AnchorAddress.class.getName());
 
+    protected static final String PATTERN_SCHEME =  "([a-zA-Z]+?)";
+
+    protected static final String PATTERN_PATH = "([ \\p{Alnum}\\./_-]+?)";
+
+    protected static final String PATTERN_FRAGMENT = "([\\p{Alnum}]+?(?:\\([\\p{Alnum},\\.\\[\\]<>\\s]*?\\))??)";
+
     public static final Pattern PATTERN =
-            Pattern.compile("^([a-zA-Z]+?)://([ \\p{Alnum}\\./_-]+?)(?:#([\\p{Alnum}]+?\\([\\p{Alnum},\\.\\[\\]<>\\s]*?\\)))??$");
+            Pattern.compile("^"+PATTERN_SCHEME+Scheme.SEPARATOR+PATTERN_PATH+"(?:#"+PATTERN_FRAGMENT+")??$");
 
     public static final String PATH_THIS = "this";
 
@@ -52,6 +60,7 @@ public class AnchorAddress {
         }
         this.scheme = scheme;
         this.path = path;
+        if (fragment != null && !fragment.endsWith(")")) fragment = fragment + "()"; // normalize
         this.fragment = fragment;
     }
 
@@ -100,11 +109,27 @@ public class AnchorAddress {
                 : null;
     }
 
+    public static AnchorAddress valueOf(Scheme scheme, PackageDoc packageDoc) {
+        return new AnchorAddress(
+                scheme,
+                packageDoc.name(),
+                null
+        );
+    }
+
+    public static AnchorAddress valueOf(Scheme scheme, ClassDoc classDoc, String fragment) {
+        return new AnchorAddress(
+                scheme,
+                classDoc.qualifiedTypeName(),
+                fragment
+        );
+    }
+
     public static AnchorAddress valueOf(Scheme scheme, MethodDoc methodDoc) {
         return new AnchorAddress(
                 scheme,
-                methodDoc.containingClass().qualifiedTypeName() + "#" + methodDoc.name() + methodDoc.flatSignature(),
-                null
+                methodDoc.containingClass().qualifiedTypeName(),
+                methodDoc.name() + methodDoc.flatSignature()
         );
     }
 
